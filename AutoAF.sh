@@ -36,7 +36,7 @@ elif [ "$1" == "init" ]; then
 	exit
 else
 ls srcs | grep .cpp > cppfiles
-ls | grep .cpp > cppfiles
+ls | grep .cpp >> cppfiles
 ls includes | grep .hpp > hppfiles
 
 echo "CC = c++
@@ -50,9 +50,9 @@ a=0
 while read line
 do
 	if [ "$a" == "0" ]; then 
-		echo "SRCS := $line \\" >> Makefile
+		echo "SRCS := srcs/$line \\" >> Makefile
 	else
-		echo "		$line \\" >> Makefile
+		echo "		srcs/$line \\" >> Makefile
 	fi
 	a=(a+1)
 done < cppfiles
