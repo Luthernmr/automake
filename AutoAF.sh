@@ -1,11 +1,35 @@
-if [ "$1" == "" ]; then
-	printf "Donnez un nom au programme "
+# Bold
+BBlack='\033[1;30m'       # Black
+BRed='\033[1;31m'         # Red
+BGreen='\033[1;32m'       # Green
+BYellow='\033[1;33m'      # Yellow
+BBlue='\033[1;34m'        # Blue
+BPurple='\033[1;35m'      # Purple
+BCyan='\033[1;36m'        # Cyan
+BWhite='\033[1;37m'       # White
+
+if [ "$1" == "install" ]; then
+	cp AutoAF.sh ~/
+	echo "alias automake="bash ~/automake.sh"" >> ~/.zshrc
+	printf "${BRed}Tu peux maintenant utiliser la commande : ${BWhite}automake [PARAM]\n"
+	printf "${BPurple}RAPPEL:\n"
+	printf "${BCyan}Initialiser le workspace: ${BWhite}automake [init]\n"
+	printf "${BCyan}Lancer le programme : ${BWhite}automake [NOM DU PROGRAME]\n"	 
+	exit
+elif [ "$1" == "" ]; then
+	printf "${BRed}Donnez un nom au programme "
+	exit
 elif [ "$1" == "init" ]; then
 	mkdir srcs
 	mkdir includes
 	touch main.cpp
+	printf "${BRed}Les repertoire ont bien ete cree"
 	exit
 fi
+
+while true
+do
+sleep 1
 ls srcs | grep .cpp > cppfiles
 ls | grep .cpp > cppfiles
 ls includes | grep .hpp > hppfiles
@@ -61,3 +85,4 @@ re : fclean all
 
 rm -rf cppfiles
 rm -rf hppfiles
+done
