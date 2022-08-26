@@ -10,7 +10,16 @@ BWhite='\033[1;37m'       # White
 
 if [ "$1" == "install" ]; then
 	cp AutoAF.sh ~/
-	echo "alias automake=\"bash ~/AutoAF.sh\"" >> ~/.zshrc
+	a=0
+	while  read line
+		do
+			if [ "$line" == "alias automake=\"bash ~/AutoAF.sh\"" ]; then
+			a=1
+			fi
+	done < ~/.zshrc
+	if [ "$a" != "1" ];  then
+		 echo "alias automake=\"bash ~/AutoAF.sh\"" >> ~/.zshrc
+	fi
 	printf "${BRed}Tu peux maintenant utiliser la commande : ${BWhite}automake [PARAM]\n"
 	printf "${BPurple}RAPPEL:\n"
 	printf "${BCyan}Initialiser le workspace: ${BWhite}automake [init]\n"
@@ -23,13 +32,9 @@ elif [ "$1" == "init" ]; then
 	mkdir srcs
 	mkdir includes
 	touch main.cpp
-	printf "${BRed}Les repertoire ont bien ete cree"
+	printf "${BRed}Les repertoires ont bien ete cree"
 	exit
-fi
-
-while true
-do
-sleep 1
+else
 ls srcs | grep .cpp > cppfiles
 ls | grep .cpp > cppfiles
 ls includes | grep .hpp > hppfiles
@@ -85,4 +90,4 @@ re : fclean all
 
 rm -rf cppfiles
 rm -rf hppfiles
-done
+fi
