@@ -10,7 +10,7 @@ BWhite='\033[1;37m'       # White
 
 if [ "$1" == "install" ]; then
 	cp AutoAF.sh ~/
-	echo "alias automake="bash ~/automake.sh"" >> ~/.zshrc
+	echo "alias automake=\"bash ~/AutoAF.sh\"" >> ~/.zshrc
 	printf "${BRed}Tu peux maintenant utiliser la commande : ${BWhite}automake [PARAM]\n"
 	printf "${BPurple}RAPPEL:\n"
 	printf "${BCyan}Initialiser le workspace: ${BWhite}automake [init]\n"
